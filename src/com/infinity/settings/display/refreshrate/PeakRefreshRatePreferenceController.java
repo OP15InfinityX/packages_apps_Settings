@@ -99,7 +99,9 @@ public class PeakRefreshRatePreferenceController extends BasePreferenceControlle
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        mHelper.setPeakRefreshRate(Integer.parseInt(String.valueOf(newValue)));
+        final int peakRefreshRate = Integer.parseInt(String.valueOf(newValue));
+        final int minRefreshRate = Math.min(mHelper.getMinimumRefreshRate(), peakRefreshRate);
+        mHelper.setRefreshRate(minRefreshRate, peakRefreshRate);
         updateState(preference);
         return true;
     }
