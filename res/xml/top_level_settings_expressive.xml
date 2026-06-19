@@ -90,6 +90,19 @@
             settings:controller="com.android.settings.display.TopLevelWallpaperPreferenceController"/>
 
         <com.android.settings.widget.HomepagePreference
+            android:icon="@drawable/ic_settings_pluskey"
+            android:key="top_level_pluskey"
+            android:order="-45"
+            android:title="@string/top_level_pluskey_title"
+            android:summary="@string/top_level_pluskey_summary"
+            settings:highlightableMenuKey="@string/top_level_pluskey_title">
+
+            <intent
+                android:action="com.oplus.pluskey.SETTINGS"
+                android:targetPackage="com.oplus.pluskey" />
+        </com.android.settings.widget.HomepagePreference>
+
+        <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.applications.AppDashboardFragment"
             android:icon="@drawable/ic_apps_filled"
             android:key="top_level_apps"
