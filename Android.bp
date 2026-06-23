@@ -144,6 +144,12 @@ android_library {
         "tflite_support_java",
         "tensorflow-lite-gpu",
         "tensorflow-lite-gpu-api",
+        "vendor.oplus.hardware.touch-V2-java",
+        "androidx.fragment_fragment",
+        "androidx.fragment_fragment-ktx",
+        "kotlin-stdlib",
+        "kotlinx_coroutines_android",
+        "kotlinx_coroutines",
     ],
 
     plugins: [
