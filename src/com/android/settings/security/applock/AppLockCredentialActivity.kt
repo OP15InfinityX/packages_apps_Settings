@@ -131,7 +131,7 @@ class AppLockCredentialActivity : FragmentActivity() {
         }
 
         val promptInfo = PromptInfo().apply {
-            title = getString(com.android.internal.R.string.unlock_application, label)
+            title = "Unlock $label"
             isDisallowBiometricsIfPolicyExists = true
             authenticators = allowedAuthenticators
             isAllowBackgroundAuthentication = true

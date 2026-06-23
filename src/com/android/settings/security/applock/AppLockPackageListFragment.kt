@@ -18,6 +18,7 @@ package com.android.settings.security.applock
 
 import android.app.AppLockManager
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PackageInfoFlags
@@ -28,7 +29,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 
 import com.android.internal.logging.nano.MetricsProto
-import com.android.internal.util.infinity.Utils
 
 import com.android.settings.R
 import com.android.settings.core.SubSettingLauncher
@@ -54,9 +54,8 @@ class AppLockPackageListFragment : DashboardFragment() {
         super.onAttach(context)
         appLockManager = context.getSystemService(AppLockManager::class.java)!!
         pm = context.packageManager
-        launchablePackages = Utils.launchablePackages(context)
-        whiteListedPackages = resources.getStringArray(
-            com.android.internal.R.array.config_appLockAllowedSystemApps)
+        launchablePackages = getLaunchablePackages()
+        whiteListedPackages = emptyArray()
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -111,6 +110,13 @@ class AppLockPackageListFragment : DashboardFragment() {
 
     private fun getLabel(packageInfo: PackageInfo) =
         packageInfo.applicationInfo?.loadLabel(pm).toString()
+
+    private fun getLaunchablePackages(): List<String> {
+        val intent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
+        return pm.queryIntentActivities(intent, PackageManager.MATCH_ALL).mapNotNull {
+            it.activityInfo?.packageName
+        }.distinct()
+    }
 
     private fun createPreference(packageInfo: PackageInfo, isProtected: Boolean): Preference {
         val label = getLabel(packageInfo)
