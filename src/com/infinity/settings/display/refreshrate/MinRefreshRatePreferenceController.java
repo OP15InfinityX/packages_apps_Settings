@@ -38,6 +38,10 @@ import java.util.List;
 public class MinRefreshRatePreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
+    private static final int LTPO_IDLE_REFRESH_RATE = 1;
+    private static final int LTPO_LOW_REFRESH_RATE = 30;
+    private static final int NO_MIN_REFRESH_RATE = 0;
+
     private final ArrayList<Integer> mSupportedList;
     private final DisplayRefreshRateHelper mHelper;
 
@@ -63,6 +67,11 @@ public class MinRefreshRatePreferenceController extends BasePreferenceController
 
         final List<String> entries = new ArrayList<>();
         final List<String> values = new ArrayList<>();
+
+        entries.add(LTPO_IDLE_REFRESH_RATE + " Hz");
+        values.add(String.valueOf(NO_MIN_REFRESH_RATE));
+        entries.add(LTPO_LOW_REFRESH_RATE + " Hz");
+        values.add(String.valueOf(LTPO_LOW_REFRESH_RATE));
 
         for (int i = 0; i < mSupportedList.size(); ++i) {
             final String refreshRate = String.valueOf(mSupportedList.get(i));
