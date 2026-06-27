@@ -161,8 +161,10 @@ public class TrustAgentsPreferenceController extends BasePreferenceController
         }
         for (int i = count - 1; i >= 0; i--) {
             final Preference pref = mScreen.getPreference(i);
-            final String[] names = TextUtils.split(pref.getKey(), "/");
-            final ComponentName componentName = new ComponentName(names[0], names[1]);
+            final ComponentName componentName = ComponentName.unflattenFromString(pref.getKey());
+            if (componentName == null) {
+                continue;
+            }
             if (!mAvailableAgents.containsKey(componentName)) {
                 mScreen.removePreference(pref);
                 mActiveAgents.remove(componentName);
