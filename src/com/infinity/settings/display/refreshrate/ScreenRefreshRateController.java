@@ -34,6 +34,9 @@ import java.util.ArrayList;
 public class ScreenRefreshRateController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
+    private static final int LTPO_IDLE_REFRESH_RATE = 1;
+    private static final int NO_MIN_REFRESH_RATE = 0;
+
     private final DisplayRefreshRateHelper mHelper;
 
     private Preference mPreference;
@@ -77,7 +80,7 @@ public class ScreenRefreshRateController extends BasePreferenceController implem
     public void updateState(Preference preference) {
         String summary = null;
 
-        final int minRefreshRate = mHelper.getMinimumRefreshRate();
+        final int minRefreshRate = getDisplayMinRefreshRate(mHelper.getMinimumRefreshRate());
         final int maxRefreshRate = mHelper.getPeakRefreshRate();
 
         final boolean extremeMode = Settings.System.getIntForUser(
@@ -99,6 +102,10 @@ public class ScreenRefreshRateController extends BasePreferenceController implem
         }
 
         super.updateState(preference);
+    }
+
+    private int getDisplayMinRefreshRate(int minRefreshRate) {
+        return minRefreshRate == NO_MIN_REFRESH_RATE ? LTPO_IDLE_REFRESH_RATE : minRefreshRate;
     }
 
     private class SettingObserver extends ContentObserver {
