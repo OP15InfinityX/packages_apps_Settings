@@ -28,8 +28,8 @@
     <!-- Do not translate. Oplus touch report-rate mode values. -->
     <string-array name="high_touch_polling_rate_values" translatable="false">
         <item>0</item>
-        <item>4</item>
         <item>3</item>
+        <item>4</item>
         <item>14</item>
     </string-array>
 
