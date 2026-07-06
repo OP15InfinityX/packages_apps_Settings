@@ -31,6 +31,7 @@ public class HighTouchPollingRatePreferenceController extends BasePreferenceCont
     private static final int MODE_240HZ = 3;
 
     private static final String TOUCH_REPORT_RATE_PROP = "sys.touch.report_rate";
+    private static final String PERSIST_TOUCH_REPORT_RATE_PROP = "persist.hbp.touch_report_rate";
 
     private final LineageHardwareManager mHardwareManager;
 
@@ -79,6 +80,7 @@ public class HighTouchPollingRatePreferenceController extends BasePreferenceCont
         final boolean enabled = mode != MODE_120HZ;
         try {
             SystemProperties.set(TOUCH_REPORT_RATE_PROP, String.valueOf(mode));
+            SystemProperties.set(PERSIST_TOUCH_REPORT_RATE_PROP, String.valueOf(mode));
         } catch (RuntimeException e) {
             Log.e(TAG, "Failed to store touch polling mode: " + mode, e);
         }
