@@ -172,4 +172,10 @@
     <string name="gms_services_summary">Google services and preferences</string>
     <string name="wellbeing_title">Digital wellbeing</string>
     <string name="wellbeing_summary">Digital wellbeing and parental controls</string>
+    <string name="haptic_profile_title">Haptic profile</string>
+    <string name="haptic_profile_richtap">Richtap</string>
+    <string name="haptic_profile_crisp">Crisp</string>
+    <string name="haptic_profile_gentle">Gentle</string>
+    <string name="haptic_profile_op15def">OnePlus 15 default</string>
+    <string name="haptic_profile_op15soft">OnePlus 15 soft</string>
 </resources>

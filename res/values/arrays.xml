@@ -1797,4 +1797,20 @@
            <item>@string/settings_random4</item>
            <item>@string/settings_random5</item>
       </string-array>
+
+    <string-array name="haptic_profile_entries">
+        <item>@string/haptic_profile_richtap</item>
+        <item>@string/haptic_profile_crisp</item>
+        <item>@string/haptic_profile_gentle</item>
+        <item>@string/haptic_profile_op15def</item>
+        <item>@string/haptic_profile_op15soft</item>
+    </string-array>
+
+    <string-array name="haptic_profile_values" translatable="false">
+        <item>richtap</item>
+        <item>crisp</item>
+        <item>gentle</item>
+        <item>op15def</item>
+        <item>op15soft</item>
+    </string-array>
 </resources>
