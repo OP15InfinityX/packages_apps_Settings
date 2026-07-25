@@ -170,4 +170,11 @@
     <string name="one_time_data_limit_when_exceeded">When exceeded</string>
     <string name="one_time_data_limit_turn_off_notify">Turn off and notify</string>
     <string name="one_time_data_limit_notify_only">Notify only</string>
+
+    <string name="haptic_profile_title">Haptic profile</string>
+    <string name="haptic_profile_richtap">Richtap</string>
+    <string name="haptic_profile_crisp">Crisp</string>
+    <string name="haptic_profile_gentle">Gentle</string>
+    <string name="haptic_profile_op15def">OnePlus 15 default</string>
+    <string name="haptic_profile_op15soft">OnePlus 15 soft</string>
 </resources>
