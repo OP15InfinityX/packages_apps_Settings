@@ -75,6 +75,12 @@
             android:targetPackage="${applicationId}"/>
     </Preference>
 
+    <!-- App lock -->
+    <com.android.settingslib.RestrictedPreference
+        android:key="app_lock"
+        android:title="@string/app_lock_title"
+        android:order="-994" />
+
 <Preference
         android:key="gaming_mode"
         android:title="@string/gaming_mode_title"
