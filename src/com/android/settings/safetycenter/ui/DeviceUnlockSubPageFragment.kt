@@ -18,9 +18,13 @@ package com.android.settings.safetycenter.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.Intent
+import androidx.preference.Preference
+import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
 import com.android.settings.search.BaseSearchIndexProvider
+import com.android.settings.security.DuressPasswordMainActivity
 import com.android.settingslib.search.SearchIndexable
 
 /** Fragment for displaying device unlock subpage within the Safety Center in Settings. */
@@ -39,8 +43,29 @@ class DeviceUnlockSubPageFragment : DashboardFragment() {
         return SettingsEnums.SAFETY_CENTER
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        // Device Unlock is populated and filtered dynamically by Safety Center. Add the
+        // Duress entry after that processing so it cannot be dropped as an unknown source.
+        val duressPreference =
+            findPreference<Preference>(DURESS_PASSWORD_KEY)
+                ?: Preference(requireContext()).also {
+                    it.key = DURESS_PASSWORD_KEY
+                    preferenceScreen.addPreference(it)
+                }
+        duressPreference.apply {
+            setTitle(R.string.duress_pwd_pref_title)
+            setSummary(R.string.duress_pwd_pref_summary)
+            setIcon(R.drawable.ic_lock)
+            intent = Intent(requireContext(), DuressPasswordMainActivity::class.java)
+            isVisible = true
+        }
+    }
+
     companion object {
         private const val TAG = "DeviceUnlockSubpageFragment"
+        private const val DURESS_PASSWORD_KEY = "duress_password"
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =

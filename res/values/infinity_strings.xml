@@ -164,6 +164,33 @@
     <string name="wellbeing_title">Digital wellbeing</string>
     <string name="wellbeing_summary">Digital wellbeing and parental controls</string>
 
+    <!-- Duress PIN/password -->
+    <string name="duress_pwd_pref_title">Duress PIN and password</string>
+    <string name="duress_pwd_pref_summary">Configure emergency credentials that permanently wipe device data</string>
+    <string name="duress_pwd_description">"A duress PIN or password can be entered instead of a user credential anywhere the operating system requests it, including the lock screen of any user or work profile.
+
+Submitting either duress credential immediately makes the device storage permanently inaccessible and wipes all user data. Infinity-X remains installed. eSIM profiles are preserved."</string>
+    <string name="duress_pwd_enter_pin">Enter duress PIN</string>
+    <string name="duress_pwd_confirm_pin">Confirm duress PIN</string>
+    <string name="duress_pwd_enter_password">Enter duress password</string>
+    <string name="duress_pwd_confirm_password">Confirm duress password</string>
+    <string name="duress_pwd_action_add">Add duress PIN and password</string>
+    <string name="duress_pwd_add_button">Add</string>
+    <string name="duress_pwd_toast_added">Added duress PIN and password</string>
+    <string name="duress_pwd_toast_updated">Updated duress PIN and password</string>
+    <string name="duress_pwd_update_button">Update</string>
+    <string name="duress_pwd_cancel_button">Cancel</string>
+    <string name="duress_pwd_proceed_button">Proceed</string>
+    <string name="duress_pwd_delete_button">Delete</string>
+    <string name="duress_pwd_action_update">Update duress PIN and password</string>
+    <string name="duress_pwd_action_delete">Delete duress PIN and password</string>
+    <string name="duress_pwd_action_delete_confirmation">Delete duress PIN and password?</string>
+    <string name="duress_pwd_save_warning_title">WARNING</string>
+    <string name="duress_pwd_save_warning_text">"Submitting the duress PIN or password instead of a normal user credential <b>will immediately make the device storage permanently inaccessible and wipe all user data</b>. eSIM profiles are preserved."</string>
+    <string name="duress_pwd_save_error">Duress PIN and password were not saved.\n\nDetails:\n%1$s</string>
+    <string name="duress_pwd_delete_error">Duress PIN and password were not deleted.\n\nDetails:\n%1$s</string>
+    <string name="duress_pwd_error_dialog_dismiss">Dismiss</string>
+
     <!-- hotspot data limit -->
     <string name="one_time_data_limit_title">One-time data limit</string>
     <string name="one_time_data_limit_size">Size</string>

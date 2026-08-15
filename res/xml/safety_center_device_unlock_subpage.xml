@@ -22,4 +22,14 @@
         android:title="@string/lock_screen_title"
         settings:safetySource="AndroidLockScreen" />
 
+    <Preference
+        android:key="duress_password"
+        android:title="@string/duress_pwd_pref_title"
+        android:summary="@string/duress_pwd_pref_summary"
+        android:icon="@drawable/ic_lock">
+        <intent
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.security.DuressPasswordMainActivity" />
+    </Preference>
+
 </PreferenceScreen>
