@@ -26,6 +26,7 @@ import static com.android.settings.regionalpreferences.RegionDialogFragment.ARG_
 import static com.android.settings.regionalpreferences.RegionDialogFragment.ARG_TARGET_LOCALE;
 import static com.android.settings.regionalpreferences.RegionDialogFragment.ARG_REPLACED_TARGET_LOCALE;
 
+import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -72,7 +73,11 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        // SettingsBaseActivity intentionally omits the action bar during SetupWizard.
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setTitle(R.string.add_a_language);
         LocaleList explicitLocales = null;
         if (isDeviceDemoMode()) {
@@ -221,7 +226,10 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     @Override
     public boolean onMenuItemActionExpand(MenuItem item) {
         // To prevent a large space on tool bar.
-        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        // The SetupWizard layout has no collapsing app bar.
+        if (mAppBarLayout != null) {
+            mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        }
         // To prevent user can expand the collpasing tool bar view.
         ViewCompat.setNestedScrollingEnabled(mSelector.getListView(), false);
         return true;
@@ -229,9 +237,10 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
-        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        if (mAppBarLayout != null) {
+            mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        }
         ViewCompat.setNestedScrollingEnabled(mSelector.getListView(), true);
         return true;
     }
 }
-

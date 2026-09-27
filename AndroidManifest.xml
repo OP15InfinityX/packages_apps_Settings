@@ -1165,6 +1165,19 @@
                   android:theme="@style/Theme.LocalePickerWithRegionActivity">
         </activity>
 
+        <!-- Pixel SetupWizard applies the selected locale before returning to setup. -->
+        <activity android:name=".localepicker.SetupWizardLocalePickerActivity"
+                  android:excludeFromRecents="true"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:exported="true"
+                  android:permission="android.permission.CHANGE_CONFIGURATION"
+                  android:theme="@style/Theme.LocalePickerWithRegionActivity">
+            <intent-filter>
+                <action android:name="com.google.android.settings.localepicker.LOCALE_REGION_PICKER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="Settings$SystemLanguageSettingsActivity"
                   android:label="@string/language_selection_title"
                   android:excludeFromRecents="true"
