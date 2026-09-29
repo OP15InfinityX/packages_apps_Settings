@@ -71,6 +71,8 @@ android_library {
         "InfinitySuite/res",
     ],
 
+    asset_dirs: ["InfinitySuite/assets"],
+
     optional_uses_libs: ["com.android.extensions.appfunctions"],
     static_libs: [
         // External dependencies
@@ -141,6 +143,10 @@ android_library {
         "org.lineageos.platform.internal",
         "LineagePreferenceLib",
         "SystemUISharedLib",
+        "tensorflowlite_java",
+        "tflite_support_java",
+        "tensorflow-lite-gpu",
+        "tensorflow-lite-gpu-api",
     ],
 
     plugins: [
@@ -222,6 +228,13 @@ android_app {
     uses_libs: ["org.apache.http.legacy"],
     use_resource_processor: true,
     resource_dirs: [],
+    jni_libs: [
+        "libtensorflowlite_jni",
+        "libtensorflowlite_gpu_jni",
+    ],
+    aaptflags: [
+        "-0 .tflite",
+    ],
     flags_packages: [
         "android.app.flags-aconfig",
     ],

@@ -38,6 +38,10 @@
     <!-- Show battery Maximum Capacity -->
     <bool name="config_show_battery_maximum_capacity">true</bool>
 
+    <!-- Descriptors of game controllers to hide from GameControllerListFragment. -->
+    <string-array name="config_hidden_game_controller_descriptors" translatable="false">
+    </string-array>
+
     <!-- ComponentName to launch a vendor-specific enrollment activity if available -->
     <string name="config_face_enroll">com.android.settings/com.google.android.settings.biometrics.face.FaceEnrollActivityDirector</string>
 
