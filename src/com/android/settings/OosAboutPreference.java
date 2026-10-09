@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
+import android.os.Debug;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.storage.StorageManager;
@@ -37,6 +38,7 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.util.MemInfoReader;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
@@ -49,6 +51,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
@@ -232,21 +235,56 @@ public class OosAboutPreference extends BasePreferenceController implements View
     	    return new StorageInfo(totalBytes, usedBytes, usedPercentage);
     	}
 
+    	private static long getTotalBackgroundMemory(ActivityManager activityManager) {
+    	    long totalBackgroundMemory = 0L;
+    	    List<ActivityManager.RunningAppProcessInfo> runningProcesses =
+    	            activityManager.getRunningAppProcesses();
+    	    if (runningProcesses == null) return 0L;
+
+    	    int[] pids = new int[runningProcesses.size()];
+    	    for (int i = 0; i < runningProcesses.size(); i++) {
+    	        pids[i] = runningProcesses.get(i).pid;
+    	    }
+    	    Debug.MemoryInfo[] memoryInfos = activityManager.getProcessMemoryInfo(pids);
+    	    if (memoryInfos == null) return 0L;
+
+    	    int count = Math.min(memoryInfos.length, runningProcesses.size());
+    	    for (int i = 0; i < count; i++) {
+    	        ActivityManager.RunningAppProcessInfo info = runningProcesses.get(i);
+    	        if (info.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
+    	            totalBackgroundMemory += (long) memoryInfos[i].getTotalPss() * 1024L;
+    	        }
+    	    }
+    	    return totalBackgroundMemory;
+    	}
+
     	public static MemoryInfo getMemoryInfo(Context context) {
     	    ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
     	    ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
     	    activityManager.getMemoryInfo(memoryInfo);
 
+    	    MemInfoReader memInfoReader = new MemInfoReader();
+    	    memInfoReader.readMemInfo();
+    	    long freeMemory = memInfoReader.getFreeSize() +
+    	            memInfoReader.getCachedSize() +
+    	            getTotalBackgroundMemory(activityManager);
+
     	    long totalMemory = memoryInfo.totalMem;
-    	    long availableMemory = memoryInfo.availMem;
+    	    long availableMemory = freeMemory;
     	    long usedMemory = totalMemory - availableMemory;
-    	    int usedRamPercentage = (int) ((usedMemory * 100) / totalMemory);
+    	    if (usedMemory < 0) {
+    	        usedMemory = 0;
+    	    }
+    	    int usedRamPercentage = totalMemory > 0 ? (int) ((usedMemory * 100) / totalMemory) : 0;
+    	    if (usedRamPercentage > 100) {
+    	        usedRamPercentage = 100;
+    	    }
 
     	    double ramInGB = Double.parseDouble(getMem()) / Math.pow(1000, 2);
     	    int roundedRamInGB = (int) Math.ceil(ramInGB);
     	    String swapSize = totalSwap();
 
-    	    return new MemoryInfo(roundedRamInGB, swapSize, usedRamPercentage);
+    	    return new MemoryInfo(roundedRamInGB, swapSize, usedRamPercentage, availableMemory, totalMemory);
     	}
 
     	private static String getMem() {
@@ -297,11 +335,20 @@ public class OosAboutPreference extends BasePreferenceController implements View
             public int roundedRamInGB;
             public String swapSize;
             public int usedRamPercentage;
+            public long availableMemory;
+            public long totalMemory;
 
             public MemoryInfo(int roundedRamInGB, String swapSize, int usedRamPercentage) {
+                this(roundedRamInGB, swapSize, usedRamPercentage, 0L, 0L);
+            }
+
+            public MemoryInfo(int roundedRamInGB, String swapSize, int usedRamPercentage,
+                    long availableMemory, long totalMemory) {
                 this.roundedRamInGB = roundedRamInGB;
                 this.swapSize = swapSize;
                 this.usedRamPercentage = usedRamPercentage;
+                this.availableMemory = availableMemory;
+                this.totalMemory = totalMemory;
             }
         }
         
