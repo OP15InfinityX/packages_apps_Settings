@@ -255,6 +255,16 @@
             android:title="@string/window_blurs"
             settings:controller="com.android.settings.display.EnableBlursPreferenceController"/>
 
+        <com.infinity.support.preferences.SystemSettingSeekBarPreference
+            android:key="blur_intensity"
+            android:title="@string/blur_intensity_title"
+            android:summary="@string/blur_intensity_summary"
+            android:max="200"
+            settings:min="0"
+            android:defaultValue="100"
+            settings:units="%"
+            android:dependency="enable_blurs_on_windows"/>
+
         <SwitchPreferenceCompat
             android:key="tap_to_wake"
             android:title="@string/tap_to_wake"

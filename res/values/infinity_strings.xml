@@ -213,4 +213,8 @@ Submitting either duress credential immediately makes the device storage permane
     <string name="haptic_profile_gentle">Gentle</string>
     <string name="haptic_profile_op15def">OnePlus 15 default</string>
     <string name="haptic_profile_op15soft">OnePlus 15 soft</string>
+
+    <!-- Blur intensity -->
+    <string name="blur_intensity_title">Blur intensity</string>
+    <string name="blur_intensity_summary" formatted="false">Control the intensity of blur effects throughout the system.\n0% = no blur, 100% = system default, 200% = double intensity.</string>
 </resources>
