@@ -17,14 +17,18 @@
 package com.android.settings.gestures;
 
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -32,6 +36,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.android.internal.util.infinity.Utils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -40,6 +45,7 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ButtonPreference;
 import com.android.settingslib.widget.SliderPreference;
 
+import com.infinity.support.preferences.SecureSettingSwitchPreference;
 import com.infinity.suite.utils.SystemUtils;
 import com.infinity.suite.utils.DeviceUtils;
 
@@ -76,6 +82,15 @@ public class GestureNavigationSettingsFragment extends DashboardFragment impleme
     private static final String KEY_EDGE_LONG_SWIPE = "navigation_bar_edge_long_swipe";
     private static final String KEY_ENABLE_TASKBAR = "enable_taskbar";
     private static final String KEY_GESTURE_HAPTIC = "back_gesture_haptic";
+    private static final String KEY_IME_SPACE = "navbar_ime_space";
+
+    private static final String IME_NAV_BAR_SPACE_OVERLAY =
+            "com.android.systemui.overlay.imenavbarspace";
+    private static final String LAUNCHER3_PACKAGE_NAME = "com.android.launcher3";
+    private static final String NEXUSLAUNCHER_PACKAGE_NAME =
+            "com.google.android.apps.nexuslauncher";
+    private static final String AOSP_IME_PACKAGE_NAME = "com.android.inputmethod.latin";
+    private static final String GBOARD_PACKAGE_NAME = "com.google.android.inputmethod.latin";
 
     final Intent mLaunchTutorialIntent =  new Intent(ACTION_GESTURE_SANDBOX)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -90,6 +105,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment impleme
     private ListPreference mCornerLongSwipeAction;
     private ListPreference mEdgeLongSwipeAction;
     private SwitchPreferenceCompat mEnableTaskbar;
+    private SecureSettingSwitchPreference mImeSpace;
 
     private float[] mBackGestureHeightScales = { 0f, 1f, 2f, 3f };
     private int mCurrentRightWidth;
@@ -152,6 +168,12 @@ public class GestureNavigationSettingsFragment extends DashboardFragment impleme
         mEnableTaskbar.setChecked(enableTaskbar);
         mEnableTaskbar.setOnPreferenceChangeListener(this);
 
+        // IME space
+        mImeSpace = getPreferenceScreen().findPreference(KEY_IME_SPACE);
+        if (mImeSpace != null) {
+            mImeSpace.setOnPreferenceChangeListener(this);
+        }
+
         boolean hapticAvailable = DeviceUtils.hasVibrator(getContext());
         if (!hapticAvailable) {
             SwitchPreferenceCompat gestureHaptic =
@@ -206,8 +228,61 @@ public class GestureNavigationSettingsFragment extends DashboardFragment impleme
         } else if (preference == mEnableTaskbar) {
             SystemUtils.showSystemUiRestartDialog(getContext());
             return true;
+        } else if (preference == mImeSpace) {
+            final Context context = getContext();
+            Utils.toggleOverlay(context, IME_NAV_BAR_SPACE_OVERLAY, !(Boolean) newValue,
+                true);
+            restartLauncherIfInstalled(context, LAUNCHER3_PACKAGE_NAME);
+            restartLauncherIfInstalled(context, NEXUSLAUNCHER_PACKAGE_NAME);
+            restartImeIfInstalled(context, AOSP_IME_PACKAGE_NAME);
+            restartImeIfInstalled(context, GBOARD_PACKAGE_NAME);
+            return true;
         }
         return false;
+    }
+
+    private static void restartLauncherIfInstalled(Context context, String packageName) {
+        if (Utils.isPackageInstalled(context, packageName, false)) {
+            Utils.restartApp(packageName, context);
+        }
+    }
+
+    private static void restartImeIfInstalled(Context context, String packageName) {
+        if (!Utils.isPackageInstalled(context, packageName, false)) {
+            return;
+        }
+
+        final Context appContext = context.getApplicationContext();
+        final ContentResolver resolver = appContext.getContentResolver();
+        final String currentIme = Settings.Secure.getStringForUser(resolver,
+                Settings.Secure.DEFAULT_INPUT_METHOD, UserHandle.USER_CURRENT);
+        final String currentSubtype = Settings.Secure.getStringForUser(resolver,
+                Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE, UserHandle.USER_CURRENT);
+        final ComponentName imeComponent = currentIme != null
+                ? ComponentName.unflattenFromString(currentIme) : null;
+        final boolean isCurrentIme = imeComponent != null
+                && packageName.equals(imeComponent.getPackageName());
+
+        Utils.restartApp(packageName, appContext);
+
+        if (!isCurrentIme) {
+            return;
+        }
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            final String nowIme = Settings.Secure.getStringForUser(resolver,
+                    Settings.Secure.DEFAULT_INPUT_METHOD, UserHandle.USER_CURRENT);
+            if (!TextUtils.equals(nowIme, currentIme)) {
+                Settings.Secure.putStringForUser(resolver,
+                        Settings.Secure.DEFAULT_INPUT_METHOD, currentIme,
+                        UserHandle.USER_CURRENT);
+                if (currentSubtype != null) {
+                    Settings.Secure.putStringForUser(resolver,
+                            Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE, currentSubtype,
+                            UserHandle.USER_CURRENT);
+                }
+            }
+        }, 1000);
     }
 
     @Override
