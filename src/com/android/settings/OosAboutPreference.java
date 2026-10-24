@@ -241,7 +241,7 @@ public class OosAboutPreference extends BasePreferenceController implements View
     	    long availableMemory = memoryInfo.availMem;
     	    long usedswap = 0;
     	    try {
-    	        usedswap = (long) (getUsedSwap() / 1.7);
+    	        usedswap = (long) (getUsedSwap() / 1.5);
     	    } catch (Exception e) {
     	        Log.e("SystemInfoUtils", "Error getting used swap", e);
     	        usedswap = 0;
