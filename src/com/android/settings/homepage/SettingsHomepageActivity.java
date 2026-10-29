@@ -47,6 +47,7 @@ import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -441,13 +442,24 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                     // Apply the insets paddings to the view.
                     v.setPadding(insets.left, 0, insets.right, insets.bottom);
 
+                    // Set status bar scrim height to match status bar/cutout insets
+                    View statusBarScrim = findViewById(R.id.status_bar_scrim);
+                    if (statusBarScrim != null) {
+                        ViewGroup.LayoutParams lp = statusBarScrim.getLayoutParams();
+                        lp.height = insets.top;
+                        statusBarScrim.setLayoutParams(lp);
+                        statusBarScrim.setVisibility(insets.top > 0 ? View.VISIBLE : View.GONE);
+                    }
+
                     // reset the top padding of search bar container to original top padding
                     // plus insets top.
                     View container = findViewById(R.id.app_bar_container);
-                    final int top_padding = getResources().getDimensionPixelSize(
-                            R.dimen.search_bar_container_top_padding);
-                    container.setPadding(container.getPaddingLeft(), top_padding + insets.top,
-                            container.getPaddingRight(), container.getPaddingBottom());
+                    if (container != null) {
+                        final int top_padding = getResources().getDimensionPixelSize(
+                                R.dimen.search_bar_container_top_padding);
+                        container.setPadding(container.getPaddingLeft(), top_padding + insets.top,
+                                container.getPaddingRight(), container.getPaddingBottom());
+                    }
 
                     // Return CONSUMED if you don't want the window insets to keep being
                     // passed down to descendant views.
@@ -581,6 +593,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         findViewById(android.R.id.content).setBackgroundColor(color);
         //Update search bar background
         findViewById(R.id.app_bar_container).setBackgroundColor(color);
+        // Update status bar scrim background
+        View statusBarScrim = findViewById(R.id.status_bar_scrim);
+        if (statusBarScrim != null) {
+            statusBarScrim.setBackgroundColor(color);
+        }
     }
 
     private void showSuggestionFragment(boolean scrollNeeded) {

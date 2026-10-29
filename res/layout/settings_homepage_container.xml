@@ -79,5 +79,17 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-</com.android.settings.edgeeffect.SpringNestScrollView>    
+</com.android.settings.edgeeffect.SpringNestScrollView>
+
+    <View
+        android:id="@+id/status_bar_scrim"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="top"
+        android:background="?android:attr/colorBackground"
+        android:elevation="15dp"
+        android:outlineProvider="none"
+        android:clickable="false"
+        android:focusable="false"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
