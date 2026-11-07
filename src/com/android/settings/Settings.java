@@ -820,6 +820,8 @@ public class Settings extends SettingsActivity {
 
     public static class SmartPixelsActivity extends SettingsActivity {}
 
+    public static class PrivateDnsSettingsActivity extends SettingsActivity { /* empty */ }
+    
     // InfinitySuite Additoon
     public static class InfinitySuiteActivity extends SettingsActivity {}
 

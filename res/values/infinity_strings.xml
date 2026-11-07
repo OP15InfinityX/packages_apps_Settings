@@ -217,4 +217,8 @@ Submitting either duress credential immediately makes the device storage permane
     <!-- Blur intensity -->
     <string name="blur_intensity_title">Blur intensity</string>
     <string name="blur_intensity_summary" formatted="false">Control the intensity of blur effects throughout the system.\n0% = no blur, 100% = system default, 200% = double intensity.</string>
+
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">Aggressive standby sleep</string>
+    <string name="aggressive_standby_sleep_summary">Aggressively kill background/running processes when device goes in idle to prevent battery drain</string>
 </resources>

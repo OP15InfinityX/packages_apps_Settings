@@ -221,4 +221,8 @@
     <!-- Glass Blur -->
     <string name="glass_blur_title">Usar efeito Glass Blur para desfoque do sistema</string>
     <string name="glass_blur_summary">Substituir o efeito de desfoque padrão pelo efeito de desfoque de vidro premium\n⚠️ Pode causar atraso ou maior consumo de bateria/temperatura em certos dispositivos de baixo desempenho.\nNOTA:Este recurso pode não funcionar em todos os dispositivos.</string>
+
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">Suspensão agressiva no modo de espera</string>
+    <string name="aggressive_standby_sleep_summary">Encerrar agressivamente os processos em segundo plano/em execução quando o dispositivo estiver inativo para evitar o consumo de bateria</string>
 </resources>

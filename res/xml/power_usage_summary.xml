@@ -57,7 +57,15 @@
             android:key="idle_manager"
             android:title="@string/idle_manager_title"
             android:summary="@string/idle_manager_summary"
-            android:fragment="com.infinity.suite.fragments.IdleManagerSettings" />
+            android:fragment="com.infinity.suite.fragments.IdleManagerSettings"
+            settings:controller="com.android.settings.fuelgauge.IdleManagerPreferenceController" />
+
+        <SwitchPreferenceCompat
+            android:key="aggressive_standby_sleep"
+            android:title="@string/aggressive_standby_sleep_title"
+            android:summary="@string/aggressive_standby_sleep_summary"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.fuelgauge.AggressiveStandbySleepPreferenceController" />
 
     <Preference
         android:key="sleep_mode"

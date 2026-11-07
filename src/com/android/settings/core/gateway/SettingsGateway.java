@@ -154,6 +154,7 @@ import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.network.NetworkProviderSettings;
+import com.android.settings.network.PrivateDnsSettings;
 import com.android.settings.network.apn.ApnEditor;
 import com.android.settings.network.apn.ApnSettings;
 import com.android.settings.network.telephony.CellularSecuritySettingsFragment;
@@ -444,6 +445,7 @@ public class SettingsGateway {
             SafetyCenterQsFragment.class.getName(),
             RunningServices.class.getName(),
             SmartPixels.class.getName(),
+            PrivateDnsSettings.class.getName(),
             InfinitySuite.class.getName(),
             ScreenRefreshRateFragment.class.getName(),
             SleepMode.class.getName()
@@ -496,6 +498,7 @@ public class SettingsGateway {
             Settings.ShadeSettingsActivity.class.getName(),
             Settings.DevRunningServicesActivity.class.getName(),
             Settings.SmartPixelsActivity.class.getName(),
+            Settings.PrivateDnsSettingsActivity.class.getName(),
             Settings.InfinitySuiteActivity.class.getName(),
             Settings.ScreenRefreshRateActivity.class.getName(),
             Settings.SleepModeActivity.class.getName()

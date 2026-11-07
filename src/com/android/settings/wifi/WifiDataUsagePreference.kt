@@ -52,25 +52,30 @@ class WifiDataUsagePreference(context: Context):
         val networkTemplate = NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build()
         val dataUsageController = DataUsageController(context)
         val usageInfo = dataUsageController.getDataUsageInfo(networkTemplate)
-        val dataUsageFormatter = DataUsageFormatter(context)
-        dataUsage = context.getString(
-            R.string.data_usage_template,
-            dataUsageFormatter.formatDataUsage(usageInfo.usageLevel),
-            usageInfo.period
-        )
-        Log.d(TAG, "wifiDataUsage=$dataUsage")
-        isEnabled = dataUsageController.getHistoricalUsageLevel(networkTemplate) > 0
-        if (isEnabled) {
-            val args = Bundle().apply {
-                putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, networkTemplate)
-                putInt(DataUsageList.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+        if (usageInfo != null) {
+            val dataUsageFormatter = DataUsageFormatter(context)
+            dataUsage = context.getString(
+                R.string.data_usage_template,
+                dataUsageFormatter.formatDataUsage(usageInfo.usageLevel),
+                usageInfo.period
+            )
+            Log.d(TAG, "wifiDataUsage=$dataUsage")
+            isEnabled = dataUsageController.getHistoricalUsageLevel(networkTemplate) > 0
+            if (isEnabled) {
+                val args = Bundle().apply {
+                    putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, networkTemplate)
+                    putInt(DataUsageList.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+                }
+                launchIntent = SubSettingLauncher(context)
+                    .setArguments(args)
+                    .setDestination(DataUsageList::class.java.name)
+                    .setTitleRes(R.string.non_carrier_data_usage)
+                    .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
+                    .toIntent()
             }
-            launchIntent = SubSettingLauncher(context)
-                .setArguments(args)
-                .setDestination(DataUsageList::class.java.name)
-                .setTitleRes(R.string.non_carrier_data_usage)
-                .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
-                .toIntent()
+        } else {
+            Log.w(TAG, "Unable to retrieve Wi-Fi data usage")
+            isEnabled = false
         }
     }
 

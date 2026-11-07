@@ -152,4 +152,8 @@
     <string name="gms_services_summary">Usługi Google i preferencje</string>
     <string name="wellbeing_title">Dobrostan cyfrowy</string>
     <string name="wellbeing_summary">Dobrostan cyfrowy i kontrola rodzicielska</string>
+
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">Agresywny stan uśpienia</string>
+    <string name="aggressive_standby_sleep_summary">Agresywnie zamykaj procesy w tle/uruchomione, gdy urządzenie przechodzi w stan bezczynności, aby zapobiec rozładowywaniu baterii</string>
 </resources>

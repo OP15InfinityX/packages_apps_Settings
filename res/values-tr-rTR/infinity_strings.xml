@@ -221,4 +221,8 @@
     <!-- Glass Blur -->
     <string name="glass_blur_title">Sistem bulanıklıkları için Glass Blur efekti kullan</string>
     <string name="glass_blur_summary">Varsayılan bulanıklık efektini premium cam bulanıklığı efektiyle değiştirin\n⚠️ Belirli düşük seviyeli cihazlarda gecikmeye veya daha yüksek pil tüketimine/sıcaklığa neden olabilir.\nNOT:Bu özellik tüm cihazlarda çalışmayabilir.</string>
+
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">Agresif bekleme modu uykusu</string>
+    <string name="aggressive_standby_sleep_summary">Pil tüketimini önlemek için cihaz boşta kaldığında arka plandaki/çalışan işlemleri agresif bir şekilde sonlandırın</string>
 </resources>

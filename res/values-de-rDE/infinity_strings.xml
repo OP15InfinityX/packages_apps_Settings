@@ -221,4 +221,8 @@
     <!-- Glass Blur -->
     <string name="glass_blur_title">Glass Blur-Effekt für Systemunschärfe verwenden</string>
     <string name="glass_blur_summary">Standardunschärfe-Effekt durch Premium-Glass Blur-Effekt ersetzen\n⚠️ Kann auf bestimmten Low-End-Geräten zu Verzögerungen oder höherem Batterieverbrauch/Temperatur führen.\nHINWEIS:Diese Funktion funktioniert möglicherweise nicht auf allen Geräten.</string>
+
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">Aggressiver Standby-Ruhezustand</string>
+    <string name="aggressive_standby_sleep_summary">Hintergrund-/laufende Prozesse aggressiv beenden, wenn das Gerät im Leerlauf ist, um Akkuverbrauch zu verhindern</string>
 </resources>

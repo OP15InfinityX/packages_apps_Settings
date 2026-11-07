@@ -691,9 +691,11 @@
     <string name="hdr_display_title">Brillo HDR mejorado</string>
     <string name="hdr_display_summary">Aumentar el brillo y ampliar la gama de colores y la nitidez en imágenes y videos de Alto Rango Dinámico (HDR). El contenido HDR se verá más brillante. Esto incrementará el consumo de batería</string>
     <string name="hdr_max_brightness_percent_title">Intensidad de brillo HDR</string>
-
     <!-- Glass Blur -->
     <string name="glass_blur_title">Usar efecto Glass Blur para desenfoques del sistema</string>
     <string name="glass_blur_summary">Reemplazar el efecto de desenfoque predeterminado por un efecto de desenfoque de vidrio premium\n⚠️ Puede causar retraso o mayor consumo de batería/temperatura en ciertos dispositivos de gama baja.\nNOTA:Esta función puede no funcionar en todos los dispositivos.</string>
 
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">Suspensión agresiva en reposo</string>
+    <string name="aggressive_standby_sleep_summary">Finalizar de forma agresiva los procesos en segundo plano/en ejecución cuando el dispositivo esté inactivo para evitar el consumo de batería</string>
 </resources>

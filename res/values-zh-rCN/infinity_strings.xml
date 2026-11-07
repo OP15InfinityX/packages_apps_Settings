@@ -218,5 +218,9 @@
 
     <!-- Glass Blur -->
     <string name="glass_blur_title">为系统模糊使用玻璃模糊效果</string>
-    <string name="glass_blur_summary">将默认模糊效果替换为高级玻璃模糊效果\n⚠️ 在某些低端设备上可能会导致延迟或更高的电池消耗/温度。\n注意：此功能可能无法在所有设备上运行。</string>
+    <string name="glass_blur_summary">将默认模糊效果替换为高级玻璃模糊效果\n⚠️ 在某些低端设备上可能会导致延迟或更高的电池消耗/温度。\n注意：此功能可能无法在所有设备 上运行。</string>
+
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">激进待机休眠</string>
+    <string name="aggressive_standby_sleep_summary">当设备处于空闲状态时激进地终止后台/运行中的进程，以防止电量消耗</string>
 </resources>

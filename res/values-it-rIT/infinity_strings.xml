@@ -221,4 +221,8 @@
     <!-- Glass Blur -->
     <string name="glass_blur_title">Usa l\'effetto Glass Blur per le sfocature di sistema</string>
     <string name="glass_blur_summary">Sostituisci l\'effetto sfocatura predefinito con un effetto glass blur premium\n⚠️ Può causare ritardi o maggiore consumo batteria/temperatura su alcuni dispositivi di fascia bassa.\nNOTA:Questa funzione potrebbe non funzionare su tutti i dispositivi.</string>
+
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">Sospensione aggressiva in standby</string>
+    <string name="aggressive_standby_sleep_summary">Termina in modo aggressivo i processi in background/in esecuzione quando il dispositivo è inattivo per evitare il consumo della batteria</string>
 </resources>

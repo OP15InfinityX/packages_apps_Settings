@@ -210,4 +210,8 @@
     <!-- Glass Blur -->
     <string name="glass_blur_title">Gunakan efek Glass Blur untuk blur sistem</string>
     <string name="glass_blur_summary">Timpa efek blur bawaan dengan efek glass blur premium\n⚠️ Dapat menyebabkan lag atau pengurasan baterai/suhu yang lebih tinggi pada perangkat low-end tertentu.\nCATATAN:Fitur ini mungkin tidak berfungsi di semua perangkat.</string>
+
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">Tidur siaga agresif</string>
+    <string name="aggressive_standby_sleep_summary">Hentikan paksa proses latar belakang/berjalan secara agresif saat perangkat dalam keadaan siaga untuk mencegah menguras baterai</string>
 </resources>

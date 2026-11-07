@@ -221,4 +221,8 @@
     <!-- Glass Blur -->
     <string name="glass_blur_title">Sử dụng hiệu ứng Glass Blur cho làm mờ hệ thống</string>
     <string name="glass_blur_summary">Ghi đè hiệu ứng làm mờ mặc định bằng hiệu ứng glass blur cao cấp\n⚠️ Có thể gây trễ hoặc tiêu hao pin/nhiệt độ cao hơn trên một số thiết bị cấu hình thấp.\nLƯU Ý:Tính năng này có thể không hoạt động trên tất cả các thiết bị.</string>
+
+    <!-- Aggressive standby sleep -->
+    <string name="aggressive_standby_sleep_title">Chế độ nghỉ tăng cường</string>
+    <string name="aggressive_standby_sleep_summary">Dừng mạnh mẽ các tiến trình chạy nền/đang chạy khi thiết bị ở trạng thái rảnh để tránh tiêu tốn pin</string>
 </resources>
