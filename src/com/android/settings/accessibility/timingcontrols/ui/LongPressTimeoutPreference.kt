@@ -91,7 +91,7 @@ class LongPressTimeoutPreference(context: Context) :
 
     override fun getSummary(context: Context): CharSequence? {
         val timeoutValue = storage(context).getInt(KEY) ?: DEFAULT_LONG_PRESS_TIMEOUT
-        val summaryResId = timeOutValueToTitleResId[timeoutValue] ?: 0
+        val summaryResId = timeOutValueToTitleResId[timeoutValue] ?: return null
         return context.getString(summaryResId)
     }
 

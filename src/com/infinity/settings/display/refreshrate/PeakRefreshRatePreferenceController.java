@@ -72,6 +72,9 @@ public class PeakRefreshRatePreferenceController extends BasePreferenceControlle
 
         mListPreference.setEntries(entries.toArray(new String[entries.size()]));
         mListPreference.setEntryValues(values.toArray(new String[values.size()]));
+        if (!mSupportedList.isEmpty()) {
+            mListPreference.setDefaultValue(String.valueOf(mSupportedList.get(mSupportedList.size() - 1)));
+        }
     }
 
     @Override

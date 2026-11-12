@@ -86,6 +86,9 @@ public class MinRefreshRatePreferenceController extends BasePreferenceController
 
         mListPreference.setEntries(entries.toArray(new String[entries.size()]));
         mListPreference.setEntryValues(values.toArray(new String[values.size()]));
+        if (!mSupportedList.isEmpty()) {
+            mListPreference.setDefaultValue(String.valueOf(mSupportedList.get(0)));
+        }
     }
 
     @Override
